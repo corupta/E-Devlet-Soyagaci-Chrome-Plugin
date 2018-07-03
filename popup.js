@@ -10,6 +10,9 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
       document.getElementById('myId').value = request.response.id;
       document.getElementById('id').value = request.response.id;
       document.getElementById('soy').value = request.response.soy;
+      var name = request.response.name;
+      name = name.substr(0, name.lastIndexOf(' '));
+      document.getElementById('name').value = name;
       document.getElementById('edevletactive').style.display = 'block';
     }
   }
@@ -101,15 +104,22 @@ async function storeData(name, id) {
 }
 
 function removeItem(id, row, root) {
-  console.log('ccc', id);
   window.items = window.items.filter((item) => item.id !== id);
   window.itemsById[id] = undefined;
   chrome.storage.sync.remove(id, () => {
     root.removeChild(row);
   });
 }
+
+function duplicateFunction(id, row, root) {
+  var id_dup = id;
+  var row_dup = row;
+  var root_dup = root;
+  return () => removeItem(id_dup, row_dup, root_dup);
+}
   
 function listOldEntries() {
+  console.log('gips');
   var root = document.getElementById('oldEntries');
   for (var i = 0; i < window.items.length; ++i) {
     var row = window.items[i];
@@ -119,11 +129,12 @@ function listOldEntries() {
     var name = document.createElement('span');
     name.className = "input-group-addon";
     name.innerText = row.name;
-    var id = document.createElement('input');
-    id.type = 'text';
-    id.disabled = true;
-    id.value = row.id;
-    id.className = "form-control";
+    var id = row.id;
+    var idElem = document.createElement('input');
+    idElem.type = 'text';
+    idElem.disabled = true;
+    idElem.value = id;
+    idElem.className = "form-control";
     var goButton = document.createElement('a');
     goButton.href = url;
     goButton.target = '_blank';
@@ -131,7 +142,7 @@ function listOldEntries() {
     goButton.className = "btn btn-success";
     var cancelButton = document.createElement('button');
     cancelButton.innerText = 'X';
-    cancelButton.onclick = () => removeItem(row.id, rowElement, root);
+    cancelButton.onclick = duplicateFunction(id, rowElement, root);
     cancelButton.className = "btn btn-danger";
     
     var buttons = document.createElement('div');
@@ -141,7 +152,7 @@ function listOldEntries() {
     buttons.appendChild(cancelButton);
     
     rowElement.appendChild(name);
-    rowElement.appendChild(id);
+    rowElement.appendChild(idElem);
     rowElement.appendChild(buttons);
     root.appendChild(rowElement);
   }

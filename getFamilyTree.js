@@ -16,7 +16,8 @@ function hexToBase64(hexstring) {
 
 function sensorSurname(surname) {
   if (surname && surname.length > 1) {
-    return surname.split('').map((str, i) => (i % Math.max(surname.length - 1, 3) ? '*' : str) ).join('');
+    //return surname.split('').map((str, i) => (i % Math.max(surname.length - 1, 3) ? '*' : str) ).join('');
+    return surname.charAt(0) + '*****' + surname.charAt(surname.length - 1);
     // ABCDEFG => A*****G
   }
   return '';
@@ -152,7 +153,7 @@ function extractFamilyTree(document_root) {
       // md5 hash of all user info.
       // so, the owner of the info can get the id, but from the id the info cannot be retrieved.
       // id - used to identify each unique person
-      data.id = hexToBase64(md5(currRow.join('')));
+      data.id = hexToBase64(md5(currRow.slice(1).join('')));
       data.gender = currRow[1] === 'K' ? 'female' : (currRow[1] === 'E' ? 'male' : 'other');
       var death = currRow[11].split('\n');
       data.alive = death[0].length === 3;
@@ -184,7 +185,7 @@ function extractFamilyTree(document_root) {
     }
   
     mergeChildren([res]);
-    return { soy: JSON.stringify(res), id: res.pedigree.data.id, name: res.pedigree.data.name, v: 1 };
+    return { soy: JSON.stringify(res), id: res.pedigree.data.id, name: res.pedigree.data.name/*, v: 1 */};
   } catch (e) {
     return { error: e.toString() };
   }
