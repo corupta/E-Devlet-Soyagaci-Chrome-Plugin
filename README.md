@@ -5,7 +5,7 @@
 
 Extension, Chrome Web Store'da yok.
 Yükleyip denemek için, 
-* [Releases](https://github.com/corupta/E-Devlet-Soyagaci-Chrome-Plugin/releases) kısmındaki zip dosyasını indirip bir klasöre çıkarın. [(zip)](https://github.com/corupta/E-Devlet-Soyagaci-Chrome-Plugin/archive/v0.1.2.zip)
+* [Releases](https://github.com/corupta/E-Devlet-Soyagaci-Chrome-Plugin/releases) kısmındaki zip dosyasını indirip bir klasöre çıkarın. [(zip)](https://github.com/corupta/E-Devlet-Soyagaci-Chrome-Plugin/archive/v0.1.3.zip)
 * `chrome://extensions/` adresine gidip Developer Mode/Geliştirici Modu seçeneğini aktif hale getirin.
 * Load Unpacked ya da bunun Türkçe karşılığını yazan butona tıklayın.
 * Buradaki zip dosyasını çıkarttığınız klasörü seçin.
