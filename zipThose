@@ -1,4 +1,4 @@
 #!/bin/bash
 
 rm edevletextension.zip
-zip edevletextension.zip *.js *.png manifest.json *.html
+zip edevletextension.zip *.js *.png manifest.json *.html *.css

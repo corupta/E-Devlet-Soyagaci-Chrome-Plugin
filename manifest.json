@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "e-Devlet Soyağacı",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "e-Devlet kapısı üzerinden soyağacınızı şemaya (şecere) çevirin ve paylaşın.",
   "icons": {
     "32" : "icon32.png",
